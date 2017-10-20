@@ -1,2 +1,2 @@
 # Script_AR
-The chromium-extension for website multator.ru
+Chrome-extention for site multator.ru
