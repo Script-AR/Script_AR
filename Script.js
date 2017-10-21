@@ -1,7 +1,10 @@
+var exid = chrome.extension.getURL("");
+console.log(exid);
 //$('head').append('<script src="https://script-ar.000webhostapp.com/js/arrays.js"></script>');
 //$('body').attr('onload', 'nicknameEdit();');
 //Загрузка скриптов
 $('head').append('<script type="text/javascript" async="" src="https://script-ar.000webhostapp.com/api.js?a='+randomString()+'"></script>');
+$('head').append('<script src="'+exid+'main_ar.js"></script>');
 //$.get('http://multochat.ucoz.net/Script_AR/api.js');
 $('body').attr('onload', 'startInit();');
 var user = $("h3[id=user_username]").text();
@@ -33,11 +36,14 @@ function randomString() {
 	var random = String(Math.random().toString(36));
 	return random.substring(2);
 }
+$('head').append('<script src="' + exid + 'function.js"></script>');
 //Замена лого
+$('img[src="/img/multator40.gif"]').attr('src',exid + 'img/logo_Ar40.png');
+$('img[src="/img/multator.png"]').attr('src', exid + 'img/logo_Ar.png');
 
 //Кнопка раздела "Подписки"
-$('a[href="http://forum.multator.ru/"]').remove();
 $('ul[class="topmenu"]').append('<li><a href="/my" class="m_sub"></a></li>');
+$('head').append('<style> a.m_sub { background: url(' + exid + 'img/newbtns.gif); display: block; width: 120px; height: 15px; background-position: 0 -1px;} a.m_sub:hover { background-position: 0 -23px;}  a.m_sub_selected { background: url(' + exid + 'img/newbtns.gif); display: block; width: 99px; height: 25px; background-position: 0 -51px; } a.m_sub_selected:hover { background-position: 0 -91.2px;} </style>');
 
 if(!sub){
 	sub = new Array(10);
@@ -201,6 +207,7 @@ if(location.href == 'https://multator.ru/my' || location.href == 'https://multat
 	var header = $('#header_wrap').html();
 	var footer = $('#footer').html();
 	$('body').empty();
+	$('body').append('<div id="header_wrap">' + header + '</div><div id="content"><center><h1>Мои подписки</h1><div id="loader"><img alt="Загрузка..." src="' + exid + 'img/preloader.gif" /></div><div id="subscribes"></div> </div><div id="footer">' + footer + '</div></center>');
 
 	while(al == false){
 		if(f == i){
