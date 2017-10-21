@@ -1,3 +1,4 @@
+//ye
 var exid = chrome.extension.getURL("");
 console.log(exid);
 //$('head').append('<script src="https://script-ar.000webhostapp.com/js/arrays.js"></script>');
