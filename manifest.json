@@ -15,7 +15,7 @@
             "matches": [
                 "https://multator.ru/*"
             ],
-            "js": ["jquery-3.2.1.min.js","cookie.js","date.js","Script.js","Script_AR.js","old.js"],
+            "js": ["jquery-3.2.1.min.js","Script_AR.js","date.js","Script.js","old.js"],
             "run_at": "document_end",
 			"all_frames": true
         }

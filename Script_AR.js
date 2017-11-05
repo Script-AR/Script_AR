@@ -1,9 +1,65 @@
+//Операции с куками
+function getCookie(name) {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// устанавливает cookie с именем name и значением value
+// options - объект с свойствами cookie (expires, path, domain, secure)
+function setCookie(name, value, options) {
+  options = options || {};
+
+  var expires = options.expires;
+
+  if (typeof expires == "number" && expires) {
+    var d = new Date();
+    d.setTime(d.getTime() + expires * 1000);
+    expires = options.expires = d;
+  }
+  if (expires && expires.toUTCString) {
+    options.expires = expires.toUTCString();
+  }
+
+  value = encodeURIComponent(value);
+
+  var updatedCookie = name + "=" + value;
+
+  for (var propName in options) {
+    updatedCookie += "; " + propName;
+    var propValue = options[propName];
+    if (propValue !== true) {
+      updatedCookie += "=" + propValue;
+    }
+  }
+
+  document.cookie = updatedCookie;
+}
+
+// удаляет cookie с именем name
+function deleteCookie(name) {
+  setCookie(name, "", {
+    expires: -1
+  })
+}//Конец операций
+var exid = chrome.extension.getURL("");
 var currentPage = location.href;
 var regexpLoc1 = /\/user\//;
 var regexpLoc2 = /\/profile\//;
 var regexpLoc3 = /\/message\//;
 var regexpLoc4 = /\/toon\//;
 var regexpLoc5 = /\/last\//;
+$('head').append('<script type="text/javascript" async="" src="https://script-ar.000webhostapp.com/api.js?a='+randomString()+'"></script>');
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+function randomString() {
+	var random = String(Math.random().toString(36));
+	return random.substring(2);
+}
+$('img[src="/img/multator40.gif"]').attr('src',exid + 'img/logo_Ar40.png');
+$('img[src="/img/multator.png"]').attr('src', exid + 'img/logo_Ar.png');
 /*var frontNickArr = ['Maks_Malewish','tim','Bomboscha','_Kvin_','sadsanta','Multator.ru','Diiir'];
 var endNickArr = ['Акроним','tim','Bomboscha','_Kvin_','sasdanta','Multator.ru','Diiir'];
 var rangArr = ['Двухмерная Максемилиан Абу Ибн Хасан','Папка мух','Администратор расширения','Король ХудОбыыЫ','Администратор сайта(починился)','Администратор сайта(починился)','2 администратор сайта(почти сломался)'];
@@ -127,6 +183,53 @@ var a = $('span.header');
     }
   }
  }
+//Просмотр непромодерированных флэш-мультов
+if (location.href.indexOf('')) {
 
+}
+//Совместные порисульки
+if (currentPage.indexOf('/draw/')!= -1) {
+    var editor = $('embed'); // вынимаем  редактор
+    var flashHref = editor.attr('src'); // вынимаем ссылку
+    //console.log(flashHref);
+    var sessStart = flashHref.indexOf('=')+1; //ищем начало сессии
+    //console.log(sessStart);
+    var session = flashHref.substring(sessStart);// вынимаем сессию
+    var preSess = flashHref.substring(0,sessStart);//сохраняем ссылку на актуальную версию
+    console.log(session);
+    function sessSet() {
+        var newSess = prompt('Это рисовальная сессия. Скопируйте её если хотите кому-то передать или введите новую.',session);
+        if (newSess !== 'null') { //если пользователь решил ввести новую сессию.
+            var endHref = preSess+newSess;
+            editor.attr('src',endHref);
+        }
+        else { //если пользователь нажал отмена
+            //ничего не происходит
+        }
+        // ветвление для того что-бы при отмене сессия не становилась null
+    }
+    function toUser() {
+        document.cookie='PHPSESSID='+oldUserSession+';path=/;';
+    }
+    function toAnonym() {
+    if (confirm('Вы уверены что хотите выйти?')) {
+            var oldUserSession = getCookie('PHPSESSID');
+            console.log(oldUserSession);
+            document.cookie = 'PHPSESSID='+randomString()+randomString()+';path=/;expires=1917-10-25;';
+            console.log('q');
+            $('#exit').removeAttr('class');
+            $('#exit').attr('style','color:green');
+            $('#exit').html('Войти');
+            $('#exit').unbind('click',toAnonym);
+            $('#exit').click(function(){
+                document.cookie='PHPSESSID='+oldUserSession+';path=/;';
+            });
+        }
+    }
+    editor.parent().parent().before('<button id="abyrvalg" style="display:block">Изменить сессию редактора</button>');
+    $('#abyrvalg').click(sessSet);
+    $('#abyrvalg').after('<button id="exit"><span class="red">Выйти</span></button>');
+    $('#exit').click(toAnonym)
+}
 
 //$('[onclick="return m.blackListAdd(\'lexsey\')"]').remove();
