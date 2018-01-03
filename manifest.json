@@ -7,13 +7,18 @@
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
     "permissions":
     [
-        "https://multator.ru/*"
+        "https://multator.ru/*",
+        "https://script-ar.github.io/*",
+        "http://flash.multator.ru/*"
     ],
 
     "content_scripts":[
         {
             "matches": [
-                "https://multator.ru/*"
+                "https://multator.ru/*",
+                "http://flash.multator.ru/*",
+                "https://script-ar.github.io/*"
+
             ],
             "js": ["jquery-3.2.1.min.js","Script_AR.js","date.js","Script.js","old.js"],
             "run_at": "document_end",
@@ -26,7 +31,8 @@
 		"img/logo_Ar40.png",
 		"img/logo_Ar.png",
 		"img/preloader.gif",
-    "main_ar.js"
+        "main_ar.js",
+        "style.css"
 
 	],
 	"browser_action": {

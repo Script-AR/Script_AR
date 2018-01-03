@@ -1,0 +1,17 @@
+.ar h1, .ar h2, .ar h3 {
+    text-align:left;
+    font-weight:bold;
+    font-family: ToonatorFont, "Comic Sans MS";
+}
+.ar h1 {
+    font-size:18pt;
+}
+
+.ar h2 {
+    font-size:14pt;
+    margin-left: 5px;
+}
+
+.ar h3 {
+    font-size:12pt;
+}

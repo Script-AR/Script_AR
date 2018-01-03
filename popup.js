@@ -12,7 +12,7 @@ $.ajax({
 		success: function(data){
 			var data = $(data);
 			data.find('a[class="menu"]').attr('style', 'color: #000000; text-decoration: none;');
-			var username = data.find('a[class="menu"] span').text();	
+			var username = data.find('a[class="menu"] span').text();
 			data.find('a[class="menu"]').removeAttr('href');
 			data.find('a[class="menu"]').attr('href', 'https://multator.ru/user/' + username);
 			data.find('a[class="menu"]').attr('target', '_blank');
@@ -27,7 +27,7 @@ $.ajax({
 			$('#news').removeAttr('style');
 		}
 });
-/*Кнопка "Обновить"    
+/*Кнопка "Обновить"
 $('#refresh').bind('click', function(){
   	var username = $('a[class="menu"] span').text();
 	$('#refresh').remove();
@@ -43,7 +43,7 @@ function loadNewComments(user){
 		context: document.body,
 		crossDomain: true,
 		success: function(data){
-			var data = $(data);  
+			var data = $(data);
 			pmax = data.find('ul[class="paginator"] li').last().text();
 			pmax = parseInt(pmax);
 			while(page < pmax){
@@ -53,6 +53,22 @@ function loadNewComments(user){
 				loadNewComments(user);
 			}
 		}
-	});   
+	});
 }
 */
+$.ajax({
+		//url: 'https://script-ar.github.com/lastnews.html',
+		url: 'https://multator.ru',
+		dataType: 'html',
+		async:false,
+		context : document.body,
+		crossDomain: true,
+		success: function(data) {
+			var data = $(data);
+			//var news = data.find('#news').text();
+			var news = 'ttts';
+			var newslog = $('#newslog');
+			newslog.html(news);
+		}
+}
+);

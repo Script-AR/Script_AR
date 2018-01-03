@@ -1046,6 +1046,7 @@ Main.prototype = {
                 }
             }
         });
+        localStorage.setItem('avatar',id);
         return false;
     },
     favorites: function(val) {
@@ -1956,6 +1957,7 @@ Main.prototype = {
         this.showToonChooser(i18n('Choose avatar'), {'for': 'avatar'}, function(toon_id) {
             $('.my-avatar-100').addClass('processing').attr('src', '/preview/' + toon_id);
             self.setAvatar(toon_id);
+            localStorage.setItem('avatar',toon_id);
         });
         return false;
     },

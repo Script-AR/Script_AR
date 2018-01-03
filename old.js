@@ -1,23 +1,29 @@
+//Если включена одна из настроек, добавляет айди для успешной работы функций
+if (sett[6] == 'true' || sett[7] == 'true') {
+    var preview = document.querySelector('img.thumb');
+    for (var i = 0; i < preview.length; i++) {
+        var id = 'scriptar'+i;
+        preview[i].setAttribute('id',id);
+    }
+}
 //Старое описание
-var oldDesc = localStorage.getItem('oldDesc');
-var desc = $('#description_text_div');
-if (oldDesc == 'on') {
-  desc.removeAttr('class');
+if (sett[5] == 'true') {
+    var desc = $('#description_text_div');
+    desc.removeAttr('class');
 }
 //Большие превью.
 //вынимаем превью
 var k = 0;
 function bigPreview1() {
   var preview = $('.thumb:first');
-  var bigPreviewVar = localStorage.getItem('bigPreview');
-  if (bigPreviewVar == 'on') {
+  if (sett[6] == 'true') {
     preview.removeAttr('class');
   }
   k = k+1;
-  var id_1 = 'qwerty'+ k;
-  //alert(id_1);
-  preview.attr('class',id_1);
+  var id = 'qwerty'+ k;
+  preview.attr('class',id);
 }
+
 window.setInterval(bigPreview1,1);
 //Анимирвоанное превью.
 var animPreview = localStorage.getItem('animPreview');
